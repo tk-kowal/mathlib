@@ -110,4 +110,16 @@ namespace testing
         auto b = lm::vec3(4, 5, 6);
         EXPECT_TRUE(AreEq(32, lm::dot(a, b)));
     }
+
+    TEST(VectorTest, MagnitudeDefault)
+    {
+        auto a = lm::vec3(0, 0, 0);
+        EXPECT_EQ(0, lm::mag(a));
+    }
+
+    TEST(VectorTest, MagnitudeUnit)
+    {
+        auto a = lm::vec3(1, 1, 0);
+        EXPECT_TRUE(AreEq(std::sqrt(2), lm::mag(a)));
+    }
 }
