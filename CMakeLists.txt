@@ -37,3 +37,10 @@ target_link_libraries(
 )
 
 gtest_discover_tests(lamath_tests)
+
+add_custom_target(
+    runtests
+    COMMAND ${CMAKE_CTEST_COMMAND} --output-on-failure
+    DEPENDS lamath_tests
+    COMMENT "Building and running tests"
+)

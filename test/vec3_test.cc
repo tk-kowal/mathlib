@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include <lamath.h>
+#include "vectors/vec3.h"
 #include "helpers.h"
 #include <gtest/gtest.h>
 
@@ -40,13 +40,74 @@ namespace testing
         EXPECT_TRUE(AreEq(other.z, vec.z));
     }
 
-    TEST(VectorTest, Addition)
+    TEST(VectorTest, AddScalar)
+    {
+        auto a = lm::vec3(1.7, 2.8, 3.33);
+        auto b = 2.25f;
+        auto c = lm::vec3(3.95, 5.05, 5.58);
+        EXPECT_TRUE((a + b) == c);
+    }
+
+    TEST(VectorTest, SubtractScalar)
+    {
+        auto a = lm::vec3(1.7, 2.8, 3.33);
+        auto b = 1.0f;
+        auto c = lm::vec3(0.7, 1.8, 2.33);
+        EXPECT_TRUE((a - b) == c);
+    }
+
+    TEST(VectorTest, MultiplyScalar)
+    {
+        auto a = lm::vec3(1.7, 2.8, 3.33);
+        auto b = 2.0f;
+        auto c = lm::vec3(3.4, 5.6, 6.66);
+        EXPECT_TRUE((a * b) == c);
+    }
+
+    TEST(VectorTest, DivideScalar)
+    {
+        auto a = lm::vec3(2.5, 5.0, -10);
+        auto b = 2.0f;
+        auto c = lm::vec3(1.25, 2.5, -5);
+        EXPECT_TRUE((a / b) == c);
+    }
+
+    TEST(VectorTest, AddVector)
     {
         auto a = lm::vec3(1.7, 2.8, 3.33);
         auto b = lm::vec3(4.2, -5, 6.0);
         auto c = lm::vec3(5.9, -2.2, 9.33);
-        std::cout << (a + b) << std::endl;
-        std::cout << c << std::endl;
         EXPECT_TRUE((a + b) == c);
+    }
+
+    TEST(VectorTest, SubtractVector)
+    {
+        auto a = lm::vec3(1.07, 5, -4.5);
+        auto b = lm::vec3(1);
+        auto c = lm::vec3(0.07, 4, -5.5);
+        EXPECT_TRUE((a - b) == c);
+    }
+
+    TEST(VectorTest, MultiplyVector)
+    {
+        auto a = lm::vec3(1.07, 5, -4.5);
+        auto b = lm::vec3(-2);
+        auto c = lm::vec3(-2.14, -10, 9);
+        EXPECT_TRUE((a * b) == c);
+    }
+
+    TEST(VectorTest, DivideVector)
+    {
+        auto a = lm::vec3(10, 5, -8);
+        auto b = lm::vec3(2);
+        auto c = lm::vec3(5, 2.5, -4);
+        EXPECT_TRUE((a / b) == c);
+    }
+
+    TEST(VectorTest, DotProduct)
+    {
+        auto a = lm::vec3(1, 2, 3);
+        auto b = lm::vec3(4, 5, 6);
+        EXPECT_TRUE(AreEq(32, lm::dot(a, b)));
     }
 }
