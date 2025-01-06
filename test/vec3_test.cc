@@ -1,8 +1,10 @@
+#include "vectors/vec3.h"
+
 #include <iostream>
 
-#include "vectors/vec3.h"
-#include "helpers.h"
 #include <gtest/gtest.h>
+
+#include "helpers.h"
 
 namespace testing
 {

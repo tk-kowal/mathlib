@@ -1,12 +1,13 @@
 #pragma once
 #include <iostream>
+#include <cmath>
+
 #include "scalars/scalar.h"
+
+#include "detail/base_types.h"
 
 namespace lm
 {
-    template <int S, typename T>
-    struct vec;
-
     typedef vec<3, float> vec3;
 
     template <typename T>
@@ -17,21 +18,21 @@ namespace lm
 
         union
         {
-            T x, r, s;
+            T x, r;
         };
         union
         {
-            T y, g, t;
+            T y, g;
         };
         union
         {
-            T z, b, p;
+            T z, b;
         };
 
-        vec() : x(0), y(0), z(0) {}
-        vec(T scalar) : x(scalar), y(scalar), z(scalar) {}
-        vec(T _x, T _y, T _z) : x(_x), y(_y), z(_z) {}
-        vec(const vec<3, T> &other) : x(other.x), y(other.y), z(other.z) {}
+        constexpr vec() = default;
+        constexpr vec(T scalar) : x(scalar), y(scalar), z(scalar) {}
+        constexpr vec(T _x, T _y, T _z) : x(_x), y(_y), z(_z) {}
+        constexpr vec(const vec<3, T> &other) : x(other.x), y(other.y), z(other.z) {}
     };
 
     // Scalar Ops
@@ -61,19 +62,18 @@ namespace lm
     constexpr vec<3, T> operator/(const vec<3, T> &a, const vec<3, T> &b);
 
     template <typename T>
+    constexpr T dot(const vec<3, T> &a, const vec<3, T> &b);
+
+    template <typename T>
     constexpr bool operator==(const vec<3, T> &a, const vec<3, T> &b);
 
+    // Unary Ops
+    template <typename T>
+    constexpr T mag(const vec<3, T> &a);
+
+    // Presentation
     template <typename T>
     constexpr std::ostream &operator<<(std::ostream &stream, const vec<3, T> &v);
-
-    template <typename T>
-    constexpr float dot(const vec<3, T> &a, const vec<3, T> &b);
-
-    template <typename T>
-    constexpr float mag(const vec<3, T> &a);
-
 }
 
-#ifndef LM_TEST
 #include "vec3.inl"
-#endif // LM_TEST

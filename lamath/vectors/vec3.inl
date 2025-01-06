@@ -1,5 +1,3 @@
-#include <cmath>
-
 namespace lm
 {
 
@@ -60,20 +58,22 @@ namespace lm
     }
 
     template <typename T>
-    constexpr std::ostream &operator<<(std::ostream &stream, const vec<3, T> &v)
-    {
-        return stream << "< " << v.x << ", " << v.y << ", " << v.z << " >";
-    }
-
-    template <typename T>
-    constexpr float dot(const vec<3, T> &a, const vec<3, T> &b)
+    constexpr T dot(const vec<3, T> &a, const vec<3, T> &b)
     {
         return (a.x * b.x) + (a.y * b.y) + (a.z * b.z);
     }
 
+    // Unary
     template <typename T>
-    constexpr float mag(const vec<3, T> &a)
+    constexpr T mag(const vec<3, T> &a)
     {
         return std::sqrt(dot(a, a));
+    }
+
+    // Presentation
+    template <typename T>
+    constexpr std::ostream &operator<<(std::ostream &stream, const vec<3, T> &v)
+    {
+        return stream << "< " << v.x << ", " << v.y << ", " << v.z << " >";
     }
 }

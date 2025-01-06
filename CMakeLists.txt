@@ -10,18 +10,30 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY build/bin)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY build/out)
 
+# Library
+add_library(lamath INTERFACE)
+target_include_directories(lamath INTERFACE 
+    $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/lamath>
+    $<INSTALL_INTERFACE:include/lamath>
+)
+
+install(TARGETS lamath EXPORT lamathConfig)
+install(DIRECTORY lamath/ DESTINATION include/lamath)
+install(EXPORT lamathConfig
+    FILE lamathConfig.cmake
+    NAMESPACE lamath::
+    DESTINATION lib/cmake/lamath
+)
 
 FetchContent_Declare(
     googletest
     URL https://github.com/google/googletest/archive/refs/tags/v1.15.2.zip
+    EXCLUDE_FROM_ALL
 )
 FetchContent_MakeAvailable(googletest)
 
-# Build Tests
+# Tests
 file(GLOB_RECURSE TESTS "test/*.cc")
-
-add_library(lamath INTERFACE)
-target_include_directories(lamath INTERFACE ${CMAKE_SOURCE_DIR}/lamath)
 
 add_executable(
     lamath_tests
