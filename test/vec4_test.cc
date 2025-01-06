@@ -157,4 +157,11 @@ namespace testing
         auto b = lm::vec4(4, 3, 2, 1);
         EXPECT_NE(a, b);
     }
+
+    TEST(Vec4Test, Negation)
+    {
+        auto a = lm::vec4(1, 2, 3, 4);
+        auto b = lm::vec4(-1, -2, -3, -4);
+        EXPECT_EQ(b, -a);
+    }
 }

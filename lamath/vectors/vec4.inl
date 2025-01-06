@@ -105,4 +105,10 @@ namespace lm
         return std::sqrt(dot(a, a));
     }
 
+    template <typename T>
+    constexpr vec<4, T> operator-(const vec<4, T> &a)
+    {
+        return vec<4, T>{-a.x, -a.y, -a.z, -a.w};
+    }
+
 }

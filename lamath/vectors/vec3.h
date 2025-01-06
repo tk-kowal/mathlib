@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <cmath>
+#include <exception>
 
 #include "scalars/scalar.h"
 
@@ -33,6 +34,7 @@ namespace lm
         constexpr vec(T scalar) : x(scalar), y(scalar), z(scalar) {}
         constexpr vec(T _x, T _y, T _z) : x(_x), y(_y), z(_z) {}
         constexpr vec(const vec<3, T> &other) : x(other.x), y(other.y), z(other.z) {}
+        constexpr T operator[](const int i);
     };
 
     // Scalar Ops
@@ -70,6 +72,9 @@ namespace lm
     // Unary Ops
     template <typename T>
     constexpr T mag(const vec<3, T> &a);
+
+    template <typename T>
+    constexpr vec<3, T> operator-(const vec<3, T> &a);
 
     // Presentation
     template <typename T>

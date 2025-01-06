@@ -71,6 +71,9 @@ namespace lm
 
     template <typename T>
     constexpr bool operator==(const vec<4, T> &a, const vec<4, T> &b);
+
+    template <typename T>
+    constexpr vec<4, T> operator-(const vec<4, T> &a);
 }
 
 #include "vec4.inl"
