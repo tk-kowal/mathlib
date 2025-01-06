@@ -31,6 +31,9 @@ namespace lm
 
     template <typename T>
     constexpr bool operator==(const mat<4, 4, T> &a, const mat<4, 4, T> &b);
+
+    template <typename T>
+    constexpr mat<4, 4, T> operator*(const mat<4, 4, T> &a, const mat<4, 4, T> &b);
 }
 
 #include "matrix/mat4x4.inl"

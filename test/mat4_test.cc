@@ -57,4 +57,27 @@ namespace testing
         };
         EXPECT_EQ(m, n);
     }
+
+    TEST(Mat4x4Test, MultiplyMatrices)
+    {
+        auto m = lm::mat4{
+            lm::vec4{1, 2, 3, 4},
+            lm::vec4{4, 3, 2, 1},
+            lm::vec4{9, 8, 7, 6},
+            lm::vec4{6, 7, 8, 9},
+        };
+        auto n = lm::mat4{
+            lm::vec4{1, 2, 3, 4},
+            lm::vec4{4, 3, 2, 1},
+            lm::vec4{9, 8, 7, 6},
+            lm::vec4{6, 7, 8, 9},
+        };
+        auto e = lm::mat4{
+            lm::vec4{1, 4, 9, 16},
+            lm::vec4{16, 9, 4, 1},
+            lm::vec4{81, 64, 49, 36},
+            lm::vec4{36, 49, 64, 81},
+        };
+        EXPECT_EQ(e, m * n);
+    }
 }

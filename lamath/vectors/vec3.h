@@ -37,48 +37,46 @@ namespace lm
         constexpr T operator[](const int i);
     };
 
-    // Scalar Ops
     template <typename T>
     constexpr vec<3, T> operator+(const vec<3, T> &a, const T scalar);
+
+    template <typename T>
+    constexpr vec<3, T> operator+(const vec<3, T> &a, const vec<3, T> &b);
 
     template <typename T>
     constexpr vec<3, T> operator-(const vec<3, T> &a, const T scalar);
 
     template <typename T>
-    constexpr vec<3, T> operator*(const vec<3, T> &a, const T scalar);
-
-    template <typename T>
-    constexpr vec<3, T> operator/(const vec<3, T> &a, const T scalar);
-
-    // Vector Ops
-    template <typename T>
-    constexpr vec<3, T> operator+(const vec<3, T> &a, const vec<3, T> &b);
-
-    template <typename T>
     constexpr vec<3, T> operator-(const vec<3, T> &a, const vec<3, T> &b);
+
+    template <typename T>
+    constexpr vec<3, T> operator-(const vec<3, T> &a);
+
+    template <typename T>
+    constexpr vec<3, T> operator*(const vec<3, T> &a, const T scalar);
 
     template <typename T>
     constexpr vec<3, T> operator*(const vec<3, T> &a, const vec<3, T> &b);
 
     template <typename T>
-    constexpr vec<3, T> operator/(const vec<3, T> &a, const vec<3, T> &b);
+    constexpr vec<3, T> operator/(const vec<3, T> &a, const T scalar);
 
     template <typename T>
-    constexpr T dot(const vec<3, T> &a, const vec<3, T> &b);
+    constexpr vec<3, T> operator/(const vec<3, T> &a, const vec<3, T> &b);
 
     template <typename T>
     constexpr bool operator==(const vec<3, T> &a, const vec<3, T> &b);
 
-    // Unary Ops
-    template <typename T>
-    constexpr T mag(const vec<3, T> &a);
-
-    template <typename T>
-    constexpr vec<3, T> operator-(const vec<3, T> &a);
-
     // Presentation
     template <typename T>
     constexpr std::ostream &operator<<(std::ostream &stream, const vec<3, T> &v);
+
+    template <typename T>
+    constexpr T dot(const vec<3, T> &a, const vec<3, T> &b);
+
+    // Unary Ops
+    template <typename T>
+    constexpr T mag(const vec<3, T> &a);
 }
 
 #include "vec3.inl"

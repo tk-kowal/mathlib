@@ -36,11 +36,9 @@ namespace lm
         constexpr vec(T scalar) : x(scalar), y(scalar), z(scalar), w(scalar) {}
         constexpr vec(const vec<4, T> &other) : x(other.x), y(other.y), z(other.z), w(other.w) {}
 
-        // Component Access
-        constexpr T operator[](const int i);
+        constexpr T operator[](const int i) const;
     };
 
-    // Scalar Ops
     template <typename T>
     constexpr vec<4, T> operator+(const vec<4, T> &a, const T scalar);
 
@@ -48,12 +46,13 @@ namespace lm
     constexpr vec<4, T> operator-(const vec<4, T> &a, const T scalar);
 
     template <typename T>
+    constexpr vec<4, T> operator-(const vec<4, T> &a);
+
+    template <typename T>
     constexpr vec<4, T> operator*(const vec<4, T> &a, const T scalar);
 
     template <typename T>
     constexpr vec<4, T> operator/(const vec<4, T> &a, const T scalar);
-
-    // Vector Ops
 
     template <typename T>
     constexpr vec<4, T> operator+(const vec<4, T> &a, const vec<4, T> &b);
@@ -62,18 +61,13 @@ namespace lm
     constexpr vec<4, T> operator-(const vec<4, T> &a, const vec<4, T> &b);
 
     template <typename T>
-    constexpr T dot(const vec<4, T> &a, const vec<4, T> &b);
-
-    // Unary Ops
-
-    template <typename T>
-    constexpr T mag(const vec<4, T> &a);
-
-    template <typename T>
     constexpr bool operator==(const vec<4, T> &a, const vec<4, T> &b);
 
     template <typename T>
-    constexpr vec<4, T> operator-(const vec<4, T> &a);
+    constexpr T dot(const vec<4, T> &a, const vec<4, T> &b);
+
+    template <typename T>
+    constexpr T mag(const vec<4, T> &a);
 }
 
 #include "vec4.inl"

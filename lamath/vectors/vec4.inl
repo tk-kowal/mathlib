@@ -2,7 +2,7 @@ namespace lm
 {
     // Component Access
     template <typename T>
-    constexpr T vec<4, T>::operator[](const int i)
+    constexpr T vec<4, T>::operator[](const int i) const
     {
         // How should I handle range checking here? throw an exception?
         switch (i)
@@ -19,7 +19,7 @@ namespace lm
         }
     }
 
-    // Scalar Ops
+    // Operators
     template <typename T>
     constexpr vec<4, T> operator+(const vec<4, T> &a, const T scalar)
     {
@@ -44,8 +44,6 @@ namespace lm
         return vec<4, T>{a.x / scalar, a.y / scalar, a.z / scalar, a.w / scalar};
     }
 
-    // Vector Ops
-
     template <typename T>
     constexpr vec<4, T> operator+(const vec<4, T> &a, const vec<4, T> &b)
     {
@@ -64,6 +62,12 @@ namespace lm
             a.y - b.y,
             a.z - b.z,
             a.w - b.w};
+    }
+
+    template <typename T>
+    constexpr vec<4, T> operator-(const vec<4, T> &a)
+    {
+        return vec<4, T>{-a.x, -a.y, -a.z, -a.w};
     }
 
     template <typename T>
@@ -87,28 +91,20 @@ namespace lm
     }
 
     template <typename T>
+    constexpr bool operator==(const vec<4, T> &a, const vec<4, T> &b)
+    {
+        return AreEq(a.x, b.x) && AreEq(a.y, b.y) && AreEq(a.z, b.z) && AreEq(a.w, b.w);
+    }
+
+    template <typename T>
     constexpr T dot(const vec<4, T> &a, const vec<4, T> &b)
     {
         return (a.x * b.x) + (a.y * b.y) + (a.z * b.z) + (a.w * b.w);
     }
 
     template <typename T>
-    constexpr bool operator==(const vec<4, T> &a, const vec<4, T> &b)
-    {
-        return AreEq(a.x, b.x) && AreEq(a.y, b.y) && AreEq(a.z, b.z) && AreEq(a.w, b.w);
-    }
-
-    // Unary Ops
-    template <typename T>
     constexpr T mag(const vec<4, T> &a)
     {
         return std::sqrt(dot(a, a));
     }
-
-    template <typename T>
-    constexpr vec<4, T> operator-(const vec<4, T> &a)
-    {
-        return vec<4, T>{-a.x, -a.y, -a.z, -a.w};
-    }
-
 }
