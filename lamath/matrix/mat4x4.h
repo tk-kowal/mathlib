@@ -25,7 +25,12 @@ namespace lm
         constexpr mat(T scalar);
         constexpr mat(std::initializer_list<row_type> r);
         constexpr row_type &operator[](const int i);
+        constexpr const row_type &operator[](const int i) const;
+        static constexpr mat<4, 4, T> identity();
     };
+
+    template <typename T>
+    constexpr bool operator==(const mat<4, 4, T> &a, const mat<4, 4, T> &b);
 }
 
 #include "matrix/mat4x4.inl"

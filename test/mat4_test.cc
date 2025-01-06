@@ -45,4 +45,16 @@ namespace testing
         EXPECT_EQ(1.0, m[2][2]);
         EXPECT_EQ(1.0, m[3][3]);
     }
+
+    TEST(Mat4x4Test, IdentityFactory)
+    {
+        auto m = lm::mat4::identity();
+        auto n = lm::mat4{
+            lm::vec4{1.0, 0, 0, 0},
+            lm::vec4{0, 1.0, 0, 0},
+            lm::vec4{0, 0, 1.0, 0},
+            lm::vec4{0, 0, 0, 1.0},
+        };
+        EXPECT_EQ(m, n);
+    }
 }

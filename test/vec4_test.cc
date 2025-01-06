@@ -144,4 +144,17 @@ namespace testing
         EXPECT_EQ(4, a[3]);
     }
 
+    TEST(Vec4Test, Equality)
+    {
+        auto a = lm::vec4(1, 2, 3, 4);
+        auto b = lm::vec4(1, 2, 3, 4);
+        EXPECT_EQ(a, b);
+    }
+
+    TEST(Vec4Test, Inequality)
+    {
+        auto a = lm::vec4(1, 2, 3, 4);
+        auto b = lm::vec4(4, 3, 2, 1);
+        EXPECT_NE(a, b);
+    }
 }
