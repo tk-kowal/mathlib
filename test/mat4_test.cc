@@ -1,4 +1,4 @@
-#include "matrix/mat4x4.h"
+#include "matrix/mat.h"
 
 #include "gtest/gtest.h"
 
@@ -79,5 +79,22 @@ namespace testing
             lm::vec4{36, 49, 64, 81},
         };
         EXPECT_EQ(e, m * n);
+    }
+
+    TEST(Mat4x4Test, Transpose)
+    {
+        auto m = lm::mat4{
+            lm::vec4{1, 2, 3, 4},
+            lm::vec4{4, 3, 2, 1},
+            lm::vec4{9, 8, 7, 6},
+            lm::vec4{6, 7, 8, 9},
+        };
+        auto e = lm::mat4{
+            lm::vec4{1, 4, 9, 6},
+            lm::vec4{2, 3, 8, 7},
+            lm::vec4{3, 2, 7, 8},
+            lm::vec4{4, 1, 6, 9},
+        };
+        EXPECT_EQ(e, transpose(m));
     }
 }
