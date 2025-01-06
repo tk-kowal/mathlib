@@ -1,4 +1,4 @@
-#include "vectors/vec4.h"
+#include "vectors/vec.h"
 
 #include <gtest/gtest.h>
 
@@ -163,5 +163,12 @@ namespace testing
         auto a = lm::vec4(1, 2, 3, 4);
         auto b = lm::vec4(-1, -2, -3, -4);
         EXPECT_EQ(b, -a);
+    }
+
+    TEST(Vec4Test, Normalize)
+    {
+        auto a = lm::vec4(1, 2, 3, 4);
+        auto e = lm::vec4(0.18257, 0.36515, 0.54772, 0.73030);
+        EXPECT_EQ(e, normalize(a));
     }
 }

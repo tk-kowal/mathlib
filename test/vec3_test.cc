@@ -1,4 +1,4 @@
-#include "vectors/vec3.h"
+#include "vectors/vec.h"
 
 #include <iostream>
 
@@ -155,5 +155,12 @@ namespace testing
         auto a = lm::vec3(1, 2, 3);
         auto b = lm::vec3(-1, -2, -3);
         EXPECT_EQ(b, -a);
+    }
+
+    TEST(Vec3Test, Normalize)
+    {
+        auto a = lm::vec3(1, 2, 3);
+        auto e = lm::vec3(0.26726, 0.53452, 0.80178);
+        EXPECT_EQ(e, normalize(a));
     }
 }
