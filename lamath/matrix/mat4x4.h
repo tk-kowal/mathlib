@@ -1,4 +1,3 @@
-/*
 #pragma once
 #include "detail/base_types.h"
 #include "vectors/vec4.h"
@@ -13,10 +12,14 @@ namespace lm
         using col_type = vec<4, T>;
         using row_type = vec<4, T>;
 
-        vec<4, col_type> cols;
-        vec<4, row_type> rows;
+        const int height = 4;
+        const int width = 4;
 
-        constexpr mat<4, 4, T>() : cols(vec<4, T>()), rows(vec<4, T>()){};
+        row_type rows[4];
+
+        constexpr mat() = default;
+        constexpr mat(T scalar);
     };
 }
-*/
+
+#include "matrix/mat4x4.inl"
