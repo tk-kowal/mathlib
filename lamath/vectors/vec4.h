@@ -1,4 +1,6 @@
 #pragma once
+#include <cassert>
+
 #include "detail/base_types.h"
 #include "scalars/scalar.h"
 
@@ -33,6 +35,9 @@ namespace lm
         constexpr vec(T _x, T _y, T _z, T _w) : x(_x), y(_y), z(_z), w(_w) {}
         constexpr vec(T scalar) : x(scalar), y(scalar), z(scalar), w(scalar) {}
         constexpr vec(const vec<4, T> &other) : x(other.x), y(other.y), z(other.z), w(other.w) {}
+
+        // Component Access
+        constexpr T operator[](const int i);
     };
 
     // Scalar Ops
@@ -66,7 +71,6 @@ namespace lm
 
     template <typename T>
     constexpr bool operator==(const vec<4, T> &a, const vec<4, T> &b);
-
 }
 
 #include "vec4.inl"

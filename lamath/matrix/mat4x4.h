@@ -1,4 +1,8 @@
 #pragma once
+#include <initializer_list>
+#include <array>
+#include <exception>
+
 #include "detail/base_types.h"
 #include "vectors/vec4.h"
 
@@ -19,6 +23,8 @@ namespace lm
 
         constexpr mat() = default;
         constexpr mat(T scalar);
+        constexpr mat(std::initializer_list<row_type> r);
+        constexpr row_type &operator[](const int i);
     };
 }
 

@@ -1,5 +1,24 @@
 namespace lm
 {
+    // Component Access
+    template <typename T>
+    constexpr T vec<4, T>::operator[](const int i)
+    {
+        // How should I handle range checking here? throw an exception?
+        switch (i)
+        {
+        default:
+        case 0:
+            return x;
+        case 1:
+            return y;
+        case 2:
+            return z;
+        case 3:
+            return w;
+        }
+    }
+
     // Scalar Ops
     template <typename T>
     constexpr vec<4, T> operator+(const vec<4, T> &a, const T scalar)

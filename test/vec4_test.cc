@@ -135,4 +135,13 @@ namespace testing
         EXPECT_TRUE(AreEq(std::sqrt(4), lm::mag(a)));
     }
 
+    TEST(Vec4Test, ComponentAccess)
+    {
+        auto a = lm::vec4(1, 2, 3, 4);
+        EXPECT_EQ(1, a[0]);
+        EXPECT_EQ(2, a[1]);
+        EXPECT_EQ(3, a[2]);
+        EXPECT_EQ(4, a[3]);
+    }
+
 }
