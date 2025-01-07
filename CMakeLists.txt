@@ -33,7 +33,7 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(googletest)
 
 # Tests
-file(GLOB_RECURSE TESTS "test/*.cc")
+file(GLOB_RECURSE TESTS "test/**/*.cc")
 
 add_executable(
     lamath_tests
@@ -46,6 +46,12 @@ target_link_libraries(
     GTest::gtest_main
     PRIVATE
     lamath
+)
+
+target_include_directories(
+    lamath_tests
+    PRIVATE
+    test
 )
 
 gtest_discover_tests(lamath_tests)

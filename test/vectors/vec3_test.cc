@@ -4,7 +4,7 @@
 
 #include <gtest/gtest.h>
 
-#include "helpers.h"
+#include "helpers/helpers.h"
 
 namespace testing
 {
