@@ -19,14 +19,16 @@ namespace lm
         const int height = 4;
         const int width = 4;
 
-        row_type rows[4];
+        col_type cols[4];
 
         constexpr mat() = default;
         constexpr mat(T scalar);
-        constexpr mat(std::initializer_list<row_type> r);
-        constexpr row_type &operator[](const int i);
-        constexpr const row_type &operator[](const int i) const;
+        constexpr mat(std::initializer_list<col_type> r);
+        constexpr col_type &operator[](const int i);
+        constexpr const col_type &operator[](const int i) const;
         static constexpr mat<4, 4, T> identity();
+        constexpr mat<4, 4, T> translate(const T x, const T y, const T z);
+        constexpr mat<4, 4, T> rotX(const float radians);
     };
 
     template <typename T>
