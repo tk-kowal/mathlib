@@ -2,7 +2,26 @@ namespace lm
 {
     // Component Access
     template <typename T>
-    constexpr T vec<4, T>::operator[](const int i) const
+    constexpr T &vec<4, T>::operator[](const int i)
+    {
+        // How should I handle range checking here? throw an exception?
+        switch (i)
+        {
+        default:
+        case 0:
+            return x;
+        case 1:
+            return y;
+        case 2:
+            return z;
+        case 3:
+            return w;
+        }
+    }
+
+    // Component Access
+    template <typename T>
+    constexpr const T &vec<4, T>::operator[](const int i) const
     {
         // How should I handle range checking here? throw an exception?
         switch (i)
@@ -94,6 +113,13 @@ namespace lm
     constexpr bool operator==(const vec<4, T> &a, const vec<4, T> &b)
     {
         return AreEq(a.x, b.x) && AreEq(a.y, b.y) && AreEq(a.z, b.z) && AreEq(a.w, b.w);
+    }
+
+    // Presentation
+    template <typename T>
+    constexpr std::ostream &operator<<(std::ostream &stream, const vec<4, T> &v)
+    {
+        return stream << "< " << v.x << ", " << v.y << ", " << v.z << ", " << v.w << " >";
     }
 
     template <typename T>

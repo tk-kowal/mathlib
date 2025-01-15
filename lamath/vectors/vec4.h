@@ -1,4 +1,5 @@
 #pragma once
+#include <iostream>
 #include <cassert>
 
 #include "detail/base_types.h"
@@ -36,7 +37,8 @@ namespace lm
         constexpr vec(T scalar) : x(scalar), y(scalar), z(scalar), w(scalar) {}
         constexpr vec(const vec<4, T> &other) : x(other.x), y(other.y), z(other.z), w(other.w) {}
 
-        constexpr T operator[](const int i) const;
+        constexpr T &operator[](const int i);
+        constexpr const T &operator[](const int i) const;
     };
 
     template <typename T>
@@ -62,6 +64,9 @@ namespace lm
 
     template <typename T>
     constexpr bool operator==(const vec<4, T> &a, const vec<4, T> &b);
+
+    template <typename T>
+    constexpr std::ostream &operator<<(std::ostream &stream, const vec<3, T> &v);
 
     template <typename T>
     constexpr T dot(const vec<4, T> &a, const vec<4, T> &b);

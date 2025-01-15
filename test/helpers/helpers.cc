@@ -5,6 +5,7 @@
 #include <gtest/gtest.h>
 
 #include "scalars/scalar.h"
+#include "matrix/mat.h"
 
 namespace testing
 {

@@ -48,7 +48,7 @@ namespace testing
 
     TEST(Mat4x4Test, IdentityFactory)
     {
-        auto m = lm::mat4::identity();
+        auto m = lm::mat4::Identity();
         auto n = lm::mat4{
             lm::vec4{1, 0, 0, 0},
             lm::vec4{0, 1, 0, 0},
@@ -73,12 +73,12 @@ namespace testing
             lm::vec4{6, 7, 8, 9},
         };
         auto e = lm::mat4{
-            lm::vec4{1, 4, 9, 16},
-            lm::vec4{16, 9, 4, 1},
-            lm::vec4{81, 64, 49, 36},
-            lm::vec4{36, 49, 64, 81},
+            lm::vec4(60),
+            lm::vec4(40),
+            lm::vec4(140),
+            lm::vec4(160),
         };
-        // EXPECT_EQ(e, m * n);
+        EXPECT_EQ(e, m * n);
     }
 
     TEST(Mat4x4Test, Transpose)
@@ -95,21 +95,25 @@ namespace testing
             lm::vec4{3, 2, 7, 8},
             lm::vec4{4, 1, 6, 9},
         };
-        EXPECT_EQ(e, transpose(m));
+        EXPECT_EQ(e, m.Transpose());
     }
 
     TEST(Mat4x4Test, Translate)
     {
         const float x = 1;
-        const float y = 2;
+        const float y = -2;
         const float z = 3;
-        auto m = lm::mat4::identity().translate(x, y, z);
-        auto e = lm::mat4{
-            lm::vec4{1, 0, 0, x},
-            lm::vec4{0, 1, 0, y},
-            lm::vec4{0, 0, 1, z},
-            lm::vec4{0, 0, 0, 1},
-        };
-        EXPECT_EQ(m, e);
+        auto m = lm::mat4::Identity().Translate(x, y, z);
+        auto e = lm::mat4(
+            1, 0, 0, x,
+            0, 1, 0, y,
+            0, 0, 1, z,
+            0, 0, 0, 1);
+        EXPECT_EQ(e, m);
+
+        auto vec = lm::vec4{1, 0, 0, 1};
+        auto translated_vec = lm::vec4{2, -2, 3, 1};
+        vec = m * vec;
+        EXPECT_EQ(translated_vec, vec);
     }
 }

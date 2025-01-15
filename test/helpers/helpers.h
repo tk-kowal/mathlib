@@ -1,4 +1,5 @@
 #include <gtest/gtest.h>
+#include "matrix/mat.h"
 
 namespace testing
 {
