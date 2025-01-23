@@ -1,7 +1,7 @@
 #pragma once
 #include <cmath>
 
-namespace lm
+namespace tml
 {
 
     static const float kEpsilon = 0.0001;

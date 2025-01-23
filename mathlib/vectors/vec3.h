@@ -7,7 +7,7 @@
 
 #include "detail/base_types.h"
 
-namespace lm
+namespace tml
 {
     typedef vec<3, float> vec3;
 

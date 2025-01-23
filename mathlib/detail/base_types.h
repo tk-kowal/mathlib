@@ -1,4 +1,4 @@
-namespace lm
+namespace tml
 {
     template <int S, typename T>
     struct vec;

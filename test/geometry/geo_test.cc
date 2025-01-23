@@ -10,8 +10,8 @@ namespace testing
 {
     TEST(GeometryTest, DegreesToRadians)
     {
-        EXPECT_TRUE(AreEq(1.57079, lm::radians(90)));
-        EXPECT_TRUE(AreEq(std::numbers::pi, lm::radians(180)));
+        EXPECT_TRUE(AreEq(1.57079, tml::radians(90)));
+        EXPECT_TRUE(AreEq(std::numbers::pi, tml::radians(180)));
     }
 
 }

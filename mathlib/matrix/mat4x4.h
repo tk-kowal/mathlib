@@ -6,7 +6,7 @@
 #include "detail/base_types.h"
 #include "vectors/vec4.h"
 
-namespace lm
+namespace tml
 {
     typedef mat<4, 4, float> mat4;
 

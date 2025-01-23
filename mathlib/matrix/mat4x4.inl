@@ -1,5 +1,5 @@
 #include <iostream>
-namespace lm
+namespace tml
 {
     // Constructors
 
@@ -25,20 +25,20 @@ namespace lm
     template <typename T>
     constexpr mat<4, 4, T>::mat(T a0, T a1, T a2, T a3, T b0, T b1, T b2, T b3, T c0, T c1, T c2, T c3, T d0, T d1, T d2, T d3)
     {
-        cols[0] = lm::vec4{a0, b0, c0, d0};
-        cols[1] = lm::vec4{a1, b1, c1, d1};
-        cols[2] = lm::vec4{a2, b2, c2, d2};
-        cols[3] = lm::vec4{a3, b3, c3, d3};
+        cols[0] = tml::vec4{a0, b0, c0, d0};
+        cols[1] = tml::vec4{a1, b1, c1, d1};
+        cols[2] = tml::vec4{a2, b2, c2, d2};
+        cols[3] = tml::vec4{a3, b3, c3, d3};
     }
 
     template <typename T>
     constexpr mat<4, 4, T> mat<4, 4, T>::Identity()
     {
         return mat4{
-            lm::vec4{1, 0, 0, 0},
-            lm::vec4{0, 1, 0, 0},
-            lm::vec4{0, 0, 1, 0},
-            lm::vec4{0, 0, 0, 1},
+            tml::vec4{1, 0, 0, 0},
+            tml::vec4{0, 1, 0, 0},
+            tml::vec4{0, 0, 1, 0},
+            tml::vec4{0, 0, 0, 1},
         };
     }
 
@@ -58,10 +58,10 @@ namespace lm
     constexpr mat<4, 4, T> mat<4, 4, T>::RotX(const float radians)
     {
         return this * mat<4, 4, T>{
-                          lm::vec4{1, 0, 0, 0},
-                          lm::vec4{0, 1, 0, 0},
-                          lm::vec4{0, 0, 1, 0},
-                          lm::vec4{0, 0, 0, 1},
+                          tml::vec4{1, 0, 0, 0},
+                          tml::vec4{0, 1, 0, 0},
+                          tml::vec4{0, 0, 1, 0},
+                          tml::vec4{0, 0, 0, 1},
                       };
     }
 
@@ -101,13 +101,13 @@ namespace lm
     template <typename T>
     constexpr mat<4, 4, T> operator*(const mat<4, 4, T> &a, const mat<4, 4, T> &b)
     {
-        auto result = lm::mat4();
+        auto result = tml::mat4();
 
         for (auto i = 0; i < 4; i++)
         {
             for (auto j = 0; j < 4; j++)
             {
-                result[i][j] = dot(a.cols[i], lm::vec4{b.cols[0][j], b.cols[1][j], b.cols[2][j], b.cols[3][j]});
+                result[i][j] = dot(a.cols[i], tml::vec4{b.cols[0][j], b.cols[1][j], b.cols[2][j], b.cols[3][j]});
             }
         }
 
@@ -117,10 +117,10 @@ namespace lm
     template <typename T>
     constexpr vec<4, T> operator*(const mat<4, 4, T> &a, const vec<4, T> &v)
     {
-        auto result = lm::vec4();
+        auto result = tml::vec4();
         for (auto i = 0; i < a.height; i++)
         {
-            result[i] = dot(lm::vec4{a[0][i], a[1][i], a[2][i], a[3][i]}, v);
+            result[i] = dot(tml::vec4{a[0][i], a[1][i], a[2][i], a[3][i]}, v);
         }
         return result;
     }

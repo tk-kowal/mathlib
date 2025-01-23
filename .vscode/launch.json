@@ -8,7 +8,7 @@
             "name": "Debug Tests",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/build/build/bin/lamath_tests",
+            "program": "${workspaceFolder}/build/build/bin/mathlib_tests",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",

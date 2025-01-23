@@ -5,7 +5,7 @@
 #include "detail/base_types.h"
 #include "scalars/scalar.h"
 
-namespace lm
+namespace tml
 {
     typedef vec<4, float> vec4;
 
