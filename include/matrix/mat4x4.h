@@ -3,8 +3,8 @@
 #include <array>
 #include <exception>
 
-#include "detail/base_types.h"
-#include "vectors/vec4.h"
+#include "../detail/base_types.h"
+#include "../vectors/vec4.h"
 
 namespace tml
 {
@@ -52,4 +52,4 @@ namespace tml
     constexpr std::ostream &operator<<(std::ostream &out, const mat<4, 4, T> &m);
 }
 
-#include "matrix/mat4x4.inl"
+#include "mat4x4.inl"

@@ -13,12 +13,12 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY build/out)
 # Library
 add_library(mathlib INTERFACE)
 target_include_directories(mathlib INTERFACE 
-    $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/mathlib>
-    $<INSTALL_INTERFACE:include/mathlib>
+    $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/include>
+    $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
 )
 
 install(TARGETS mathlib EXPORT mathlibConfig)
-install(DIRECTORY mathlib/ DESTINATION include/mathlib)
+install(DIRECTORY include/ DESTINATION include/mathlib)
 install(EXPORT mathlibConfig
     FILE mathlibConfig.cmake
     NAMESPACE tml::

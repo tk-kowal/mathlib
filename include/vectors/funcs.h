@@ -1,5 +1,5 @@
 #pragma once
-#include "detail/base_types.h"
+#include "../detail/base_types.h"
 
 namespace tml
 {
@@ -7,4 +7,4 @@ namespace tml
     constexpr vec<S, T> normalize(const vec<S, T> &v);
 }
 
-#include "vectors/funcs.inl"
+#include "../vectors/funcs.inl"

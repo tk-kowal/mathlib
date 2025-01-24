@@ -3,9 +3,8 @@
 #include <cmath>
 #include <exception>
 
-#include "scalars/scalar.h"
-
-#include "detail/base_types.h"
+#include "../detail/base_types.h"
+#include "../scalars/scalar.h"
 
 namespace tml
 {

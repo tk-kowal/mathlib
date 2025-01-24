@@ -5,4 +5,4 @@ namespace tml
     constexpr float radians(const float degrees);
 }
 
-#include "geometry/funcs.inl"
+#include "funcs.inl"
