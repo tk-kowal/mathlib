@@ -23,17 +23,17 @@ namespace tml
 
         mat() = default;
         constexpr mat(T scalar);
-        constexpr mat(std::initializer_list<col_type> r);
-        constexpr mat(T a0, T a1, T a2, T a3, T b0, T b1, T b2, T b3, T c0, T c1, T c2, T c3, T d0, T d1, T d2, T d3);
+        constexpr mat(col_type u, col_type v, col_type w, col_type x);
+        constexpr mat(T x0, T x1, T x2, T x3, T y0, T y1, T y2, T y3, T z0, T z1, T z2, T z3, T w0, T w1, T w2, T w3);
         static constexpr mat<4, 4, T> Identity();
 
         constexpr const col_type &operator[](const int i) const;
         constexpr col_type &operator[](const int i);
 
         constexpr mat<4, 4, T> Translate(const T x, const T y, const T z);
-        constexpr mat<4, 4, T> RotX(const float radians);
-        // constexpr mat<4, 4, T> RotY(const float radians);
-        // constexpr mat<4, 4, T> RotZ(const float radians);
+        constexpr mat<4, 4, T> RotX(const float rads);
+        constexpr mat<4, 4, T> RotY(const float rads);
+        constexpr mat<4, 4, T> RotZ(const float rads);
         constexpr mat<4, 4, T> Transpose();
 
         // constexpr bool IsInvertible();
@@ -45,8 +45,16 @@ namespace tml
     template <typename T>
     constexpr mat<4, 4, T> operator*(const mat<4, 4, T> &a, const mat<4, 4, T> &b);
 
+    // matrix + matrix
+    // template <typename T>
+    // constexpr mat<4, 4, T> operator+(const mat<4, 4, T> &a, const mat<4, 4, T> &b);
+
     template <typename T>
     constexpr vec<4, T> operator*(const mat<4, 4, T> &a, const vec<4, T> &v);
+
+    // matrix x scalar
+    // template <typename T>
+    // constexpr vec<4, T> operator*(const mat<4, 4, T> &a, const T x);
 
     template <typename T>
     constexpr std::ostream &operator<<(std::ostream &out, const mat<4, 4, T> &m);

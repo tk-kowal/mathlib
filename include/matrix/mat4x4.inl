@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cmath>
 
 namespace tml
 {
@@ -14,33 +15,31 @@ namespace tml
     };
 
     template <typename T>
-    constexpr mat<4, 4, T>::mat(std::initializer_list<mat<4, 4, T>::col_type> r)
+    constexpr mat<4, 4, T>::mat(col_type u, col_type v, col_type w, col_type x)
     {
-        if (r.size() != 4)
-        {
-            throw std::invalid_argument("Attempted to construct mat4 with incompatible initializer list size.");
-        }
-        std::copy(r.begin(), r.end(), cols);
+        cols[0] = u;
+        cols[1] = v;
+        cols[2] = w;
+        cols[3] = x;
     };
 
     template <typename T>
-    constexpr mat<4, 4, T>::mat(T a0, T a1, T a2, T a3, T b0, T b1, T b2, T b3, T c0, T c1, T c2, T c3, T d0, T d1, T d2, T d3)
+    constexpr mat<4, 4, T>::mat(T x0, T x1, T x2, T x3, T y0, T y1, T y2, T y3, T z0, T z1, T z2, T z3, T w0, T w1, T w2, T w3)
     {
-        cols[0] = tml::vec4{a0, b0, c0, d0};
-        cols[1] = tml::vec4{a1, b1, c1, d1};
-        cols[2] = tml::vec4{a2, b2, c2, d2};
-        cols[3] = tml::vec4{a3, b3, c3, d3};
+        cols[0] = tml::vec4{x0, y0, z0, w0};
+        cols[1] = tml::vec4{x1, y1, z1, w1};
+        cols[2] = tml::vec4{x2, y2, z2, w2};
+        cols[3] = tml::vec4{x3, y3, z3, w3};
     }
 
     template <typename T>
     constexpr mat<4, 4, T> mat<4, 4, T>::Identity()
     {
-        return mat4{
-            tml::vec4{1, 0, 0, 0},
-            tml::vec4{0, 1, 0, 0},
-            tml::vec4{0, 0, 1, 0},
-            tml::vec4{0, 0, 0, 1},
-        };
+        return mat4(
+            1, 0, 0, 0,
+            0, 1, 0, 0,
+            0, 0, 1, 0,
+            0, 0, 0, 1);
     }
 
     // Transforms
@@ -48,22 +47,41 @@ namespace tml
     template <typename T>
     constexpr mat<4, 4, T> mat<4, 4, T>::Translate(const T x, const T y, const T z)
     {
-        return mat<4, 4, T>{
+        return mat<4, 4, T>(
             cols[0],
             cols[1],
             cols[2],
-            {x, y, z, cols[3].w}};
+            {x, y, z, cols[3].w});
     }
 
     template <typename T>
-    constexpr mat<4, 4, T> mat<4, 4, T>::RotX(const float radians)
+    constexpr mat<4, 4, T> mat<4, 4, T>::RotX(const float rads)
     {
-        return this * mat<4, 4, T>{
-                          tml::vec4{1, 0, 0, 0},
-                          tml::vec4{0, 1, 0, 0},
-                          tml::vec4{0, 0, 1, 0},
-                          tml::vec4{0, 0, 0, 1},
-                      };
+        return *this * mat4(
+                           1, 0, 0, 0,
+                           0, std::cosf(rads), -1 * std::sinf(rads), 0,
+                           0, std::sinf(rads), std::cosf(rads), 0,
+                           0, 0, 0, 1);
+    }
+
+    template <typename T>
+    constexpr mat<4, 4, T> mat<4, 4, T>::RotY(const float rads)
+    {
+        return *this * mat4(
+                           std::cosf(rads), 0, std::sinf(rads), 0,
+                           0, 1, 0, 0,
+                           -1 * std::sinf(rads), 0, std::cosf(rads), 0,
+                           0, 0, 0, 1);
+    }
+
+    template <typename T>
+    constexpr mat<4, 4, T> mat<4, 4, T>::RotZ(const float rads)
+    {
+        return *this * mat4(
+                           std::cos(rads), -1 * std::sinf(rads), 0, 0,
+                           std::sin(rads), std::cos(rads), 0, 0,
+                           0, 0, 1, 0,
+                           0, 0, 0, 1);
     }
 
     template <typename T>
