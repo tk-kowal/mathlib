@@ -25,18 +25,16 @@ namespace tml
         constexpr mat(T scalar);
         constexpr mat(col_type u, col_type v, col_type w, col_type x);
         constexpr mat(T x0, T x1, T x2, T x3, T y0, T y1, T y2, T y3, T z0, T z1, T z2, T z3, T w0, T w1, T w2, T w3);
-        static constexpr mat<4, 4, T> Identity();
 
+        static constexpr mat<4, 4, T> Identity();
+        constexpr mat<4, 4, T> Inverse();
         constexpr const col_type &operator[](const int i) const;
         constexpr col_type &operator[](const int i);
-
-        constexpr mat<4, 4, T> Translate(const T x, const T y, const T z);
         constexpr mat<4, 4, T> RotX(const float rads);
         constexpr mat<4, 4, T> RotY(const float rads);
         constexpr mat<4, 4, T> RotZ(const float rads);
-        constexpr mat<4, 4, T> Transpose();
-
-        // constexpr bool IsInvertible();
+        constexpr mat<4, 4, T> Translate(const T x, const T y, const T z);
+        constexpr mat<4, 4, T> Transpose() const;
     };
 
     template <typename T>

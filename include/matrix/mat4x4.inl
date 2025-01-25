@@ -42,17 +42,14 @@ namespace tml
             0, 0, 0, 1);
     }
 
-    // Transforms
-
     template <typename T>
-    constexpr mat<4, 4, T> mat<4, 4, T>::Translate(const T x, const T y, const T z)
+    constexpr mat<4, 4, T> mat<4, 4, T>::Inverse()
     {
-        return mat<4, 4, T>(
-            cols[0],
-            cols[1],
-            cols[2],
-            {x, y, z, cols[3].w});
+        // calculate matrix of minors
+        //
     }
+
+    // Transforms
 
     template <typename T>
     constexpr mat<4, 4, T> mat<4, 4, T>::RotX(const float rads)
@@ -85,7 +82,17 @@ namespace tml
     }
 
     template <typename T>
-    constexpr mat<4, 4, T> mat<4, 4, T>::Transpose()
+    constexpr mat<4, 4, T> mat<4, 4, T>::Translate(const T x, const T y, const T z)
+    {
+        return mat<4, 4, T>(
+            cols[0],
+            cols[1],
+            cols[2],
+            {x, y, z, cols[3].w});
+    }
+
+    template <typename T>
+    constexpr mat<4, 4, T> mat<4, 4, T>::Transpose() const
     {
         return mat<4, 4, T>(
             cols[0][0], cols[0][1], cols[0][2], cols[0][3],
@@ -126,7 +133,10 @@ namespace tml
         {
             for (auto j = 0; j < 4; j++)
             {
-                result[i][j] = dot(a.cols[i], tml::vec4{b.cols[0][j], b.cols[1][j], b.cols[2][j], b.cols[3][j]});
+                result[j][i] = a.cols[0][i] * b.cols[j][0] +
+                               a.cols[1][i] * b.cols[j][1] +
+                               a.cols[2][i] * b.cols[j][2] +
+                               a.cols[3][i] * b.cols[j][3];
             }
         }
 
@@ -148,9 +158,13 @@ namespace tml
     constexpr std::ostream &operator<<(std::ostream &out, const mat<4, 4, T> &m)
     {
         out << std::endl;
-        for (auto &col : m.cols)
+        for (auto row = 0; row < 4; row++)
         {
-            out << col << std::endl;
+            for (auto col = 0; col < 4; col++)
+            {
+                out << m.cols[col][row] << ", ";
+            }
+            out << std::endl;
         }
         return out;
     }
