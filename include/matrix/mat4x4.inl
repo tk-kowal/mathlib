@@ -42,10 +42,71 @@ namespace tml
             0, 0, 0, 1);
     }
 
-    // template <typename T>
-    // constexpr mat<4, 4, T> mat<4, 4, T>::Inverse()
-    // {
-    // }
+    template <typename T>
+    constexpr mat<4, 4, T> mat<4, 4, T>::Inverse()
+    {
+        // FIX: Optimization and SIMD for another time
+        // I lifted this 100% from GLM for the time being. I was spending too much time on this.
+        const mat<4, 4, T> &m = *this;
+
+        T coef00 = m[2][2] * m[3][3] - m[3][2] * m[2][3];
+        T coef02 = m[1][2] * m[3][3] - m[3][2] * m[1][3];
+        T coef03 = m[1][2] * m[2][3] - m[2][2] * m[1][3];
+
+        T coef04 = m[2][1] * m[3][3] - m[3][1] * m[2][3];
+        T coef06 = m[1][1] * m[3][3] - m[3][1] * m[1][3];
+        T coef07 = m[1][1] * m[2][3] - m[2][1] * m[1][3];
+
+        T coef08 = m[2][1] * m[3][2] - m[3][1] * m[2][2];
+        T coef10 = m[1][1] * m[3][2] - m[3][1] * m[1][2];
+        T coef11 = m[1][1] * m[2][2] - m[2][1] * m[1][2];
+
+        T coef12 = m[2][0] * m[3][3] - m[3][0] * m[2][3];
+        T coef14 = m[1][0] * m[3][3] - m[3][0] * m[1][3];
+        T coef15 = m[1][0] * m[2][3] - m[2][0] * m[1][3];
+
+        T coef16 = m[2][0] * m[3][2] - m[3][0] * m[2][2];
+        T coef18 = m[1][0] * m[3][2] - m[3][0] * m[1][2];
+        T coef19 = m[1][0] * m[2][2] - m[2][0] * m[1][2];
+
+        T coef20 = m[2][0] * m[3][1] - m[3][0] * m[2][1];
+        T coef22 = m[1][0] * m[3][1] - m[3][0] * m[1][1];
+        T coef23 = m[1][0] * m[2][1] - m[2][0] * m[1][1];
+
+        vec4 fac0 = {coef00, coef00, coef02, coef03};
+        vec4 fac1 = {coef04, coef04, coef06, coef07};
+        vec4 fac2 = {coef08, coef08, coef10, coef11};
+        vec4 fac3 = {coef12, coef12, coef14, coef15};
+        vec4 fac4 = {coef16, coef16, coef18, coef19};
+        vec4 fac5 = {coef20, coef20, coef22, coef23};
+
+        vec4 vec0 = {m[1][0], m[0][0], m[0][0], m[0][0]};
+        vec4 vec1 = {m[1][1], m[0][1], m[0][1], m[0][1]};
+        vec4 vec2 = {m[1][2], m[0][2], m[0][2], m[0][2]};
+        vec4 vec3 = {m[1][3], m[0][3], m[0][3], m[0][3]};
+
+        vec4 inv0 = {vec1 * fac0 - vec2 * fac1 + vec3 * fac2};
+        vec4 inv1 = {vec0 * fac0 - vec2 * fac3 + vec3 * fac4};
+        vec4 inv2 = {vec0 * fac1 - vec1 * fac3 + vec3 * fac5};
+        vec4 inv3 = {vec0 * fac2 - vec1 * fac4 + vec2 * fac5};
+
+        vec4 signA = {+1, -1, +1, -1};
+        vec4 signB = {-1, +1, -1, +1};
+        mat4 inverse = {
+            inv0 * signA,
+            inv1 * signB,
+            inv2 * signA,
+            inv3 * signB};
+
+        vec4 Row0(inverse[0][0], inverse[1][0], inverse[2][0], inverse[3][0]);
+
+        vec4 Dot0(m[0] * Row0);
+        T Dot1 = (Dot0.x + Dot0.y) + (Dot0.z + Dot0.w);
+
+        T OneOverDeterminant = static_cast<T>(1) / Dot1;
+
+        return inverse * OneOverDeterminant;
+    }
 
     // Transforms
 
@@ -148,6 +209,20 @@ namespace tml
         for (auto i = 0; i < a.height; i++)
         {
             result[i] = dot(tml::vec4{a[0][i], a[1][i], a[2][i], a[3][i]}, v);
+        }
+        return result;
+    }
+
+    template <typename T>
+    constexpr mat<4, 4, T> operator*(const mat<4, 4, T> &a, const T s)
+    {
+        auto result = tml::mat4();
+        for (auto i = 0; i < a.height; i++)
+        {
+            for (auto j = 0; j < a.width; j++)
+            {
+                result[i][j] = a[i][j] * s;
+            }
         }
         return result;
     }

@@ -53,6 +53,7 @@ namespace tml
     template <typename T>
     constexpr mat<3, 3, T> mat<3, 3, T>::Inverse()
     {
+        // FIX: Optimization and SIMD for another time
         const mat<3, 3, T> &m = *this;
 
         auto cofac00 = m[1][1] * m[2][2] - m[2][1] * m[1][2];
@@ -68,7 +69,7 @@ namespace tml
         auto cofac22 = m[0][0] * m[1][1] - m[1][0] * m[0][1];
 
         T det = m[0][0] * cofac00 + m[1][0] * cofac10 + m[2][0] * cofac20;
-        T invDet = T(1) / det;
+        T invDet = static_cast<T>(1) / det;
 
         return mat<3, 3, T>(
             cofac00 * invDet, cofac01 * invDet, cofac02 * invDet,

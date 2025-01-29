@@ -43,16 +43,11 @@ namespace tml
     template <typename T>
     constexpr mat<4, 4, T> operator*(const mat<4, 4, T> &a, const mat<4, 4, T> &b);
 
-    // matrix + matrix
-    // template <typename T>
-    // constexpr mat<4, 4, T> operator+(const mat<4, 4, T> &a, const mat<4, 4, T> &b);
-
     template <typename T>
     constexpr vec<4, T> operator*(const mat<4, 4, T> &a, const vec<4, T> &v);
 
-    // matrix x scalar
-    // template <typename T>
-    // constexpr vec<4, T> operator*(const mat<4, 4, T> &a, const T x);
+    template <typename T>
+    constexpr mat<4, 4, T> operator*(const mat<4, 4, T> &a, const T x);
 
     template <typename T>
     constexpr std::ostream &operator<<(std::ostream &out, const mat<4, 4, T> &m);
