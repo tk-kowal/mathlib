@@ -81,6 +81,26 @@ namespace tml
         }
     }
 
+    template <typename T>
+    constexpr T vec<3, T>::operator[](const int i) const
+    {
+        if (i < 0 || i > 2)
+        {
+            throw std::out_of_range("Atttempted to access vec3 at index: " + std::to_string(i));
+        }
+
+        switch (i)
+        {
+        default:
+        case 0:
+            return x;
+        case 1:
+            return y;
+        case 2:
+            return z;
+        }
+    }
+
     // Presentation
     template <typename T>
     constexpr std::ostream &operator<<(std::ostream &stream, const vec<3, T> &v)

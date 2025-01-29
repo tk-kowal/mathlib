@@ -167,4 +167,21 @@ namespace testing
 
         EXPECT_EQ(expected, m.RotZ(tml::radians(90)));
     }
+
+    TEST(Mat4x4Test, Cofactor)
+    {
+        tml::mat4 m(
+            1, 0, 0, 0,
+            0, 1, 0, 0,
+            0, 0, 1, 0,
+            0, 0, 0, 1);
+
+        tml::mat4 e(
+            1, 0, 0, 0,
+            0, 1, 0, 0,
+            0, 0, 1, 0,
+            0, 0, 0, 1);
+
+        EXPECT_EQ(e, m);
+    }
 }

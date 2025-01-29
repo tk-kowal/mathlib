@@ -34,6 +34,7 @@ namespace tml
         constexpr vec(T _x, T _y, T _z) : x(_x), y(_y), z(_z) {}
         constexpr vec(const vec<3, T> &other) : x(other.x), y(other.y), z(other.z) {}
         constexpr T operator[](const int i);
+        constexpr T operator[](const int i) const;
     };
 
     template <typename T>

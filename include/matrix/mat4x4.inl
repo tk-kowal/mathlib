@@ -42,17 +42,15 @@ namespace tml
             0, 0, 0, 1);
     }
 
-    template <typename T>
-    constexpr mat<4, 4, T> mat<4, 4, T>::Inverse()
-    {
-        // calculate matrix of minors
-        //
-    }
+    // template <typename T>
+    // constexpr mat<4, 4, T> mat<4, 4, T>::Inverse()
+    // {
+    // }
 
     // Transforms
 
     template <typename T>
-    constexpr mat<4, 4, T> mat<4, 4, T>::RotX(const float rads)
+    constexpr mat<4, 4, T> mat<4, 4, T>::RotX(const float rads) const
     {
         return *this * mat4(
                            1, 0, 0, 0,
@@ -62,7 +60,7 @@ namespace tml
     }
 
     template <typename T>
-    constexpr mat<4, 4, T> mat<4, 4, T>::RotY(const float rads)
+    constexpr mat<4, 4, T> mat<4, 4, T>::RotY(const float rads) const
     {
         return *this * mat4(
                            std::cosf(rads), 0, std::sinf(rads), 0,
@@ -72,7 +70,7 @@ namespace tml
     }
 
     template <typename T>
-    constexpr mat<4, 4, T> mat<4, 4, T>::RotZ(const float rads)
+    constexpr mat<4, 4, T> mat<4, 4, T>::RotZ(const float rads) const
     {
         return *this * mat4(
                            std::cos(rads), -1 * std::sinf(rads), 0, 0,
@@ -82,7 +80,7 @@ namespace tml
     }
 
     template <typename T>
-    constexpr mat<4, 4, T> mat<4, 4, T>::Translate(const T x, const T y, const T z)
+    constexpr mat<4, 4, T> mat<4, 4, T>::Translate(const T x, const T y, const T z) const
     {
         return mat<4, 4, T>(
             cols[0],

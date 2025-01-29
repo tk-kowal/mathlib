@@ -30,10 +30,10 @@ namespace tml
         constexpr mat<4, 4, T> Inverse();
         constexpr const col_type &operator[](const int i) const;
         constexpr col_type &operator[](const int i);
-        constexpr mat<4, 4, T> RotX(const float rads);
-        constexpr mat<4, 4, T> RotY(const float rads);
-        constexpr mat<4, 4, T> RotZ(const float rads);
-        constexpr mat<4, 4, T> Translate(const T x, const T y, const T z);
+        constexpr mat<4, 4, T> RotX(const float rads) const;
+        constexpr mat<4, 4, T> RotY(const float rads) const;
+        constexpr mat<4, 4, T> RotZ(const float rads) const;
+        constexpr mat<4, 4, T> Translate(const T x, const T y, const T z) const;
         constexpr mat<4, 4, T> Transpose() const;
     };
 
